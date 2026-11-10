@@ -1,0 +1,312 @@
+@import "tailwindcss";
+
+/*
+ * Design language - "Business in motion"
+ * Deep ink canvases with a living Three.js particle field, crisp light sections in between,
+ * teal for action, iris for depth. Large confident type, mono labels, GSAP-driven motion
+ * (Lenis smooth scroll, split-text reveals, scroll-scrubbed scenes, magnetic controls).
+ */
+@theme {
+  /* Retail Soft brand palette */
+  --color-void: #04070d;
+  --color-ink: #080f1a;
+  --color-navy: #14233c;
+  --color-navy-2: #0e1a2e;
+  --color-teal: #00d4c7;
+  --color-teal-deep: #00a89e;
+  --color-iris: #8b5cf6;
+  --color-cloud: #f2f4f8;
+  --color-mist: #9fb0c8;
+  --color-slate: #4a5a72;
+
+  --color-teal-text: #00827a;
+  --color-teal-50: #e6f9f7;
+  --color-teal-100: #c4f1ec;
+  --color-iris-dark: #6d3fe0;
+  --color-iris-50: #f1ecfe;
+  --color-line: #e2e8f0;
+  --color-whatsapp: #1fa855;
+
+  /* semantic roles used by components */
+  --color-brand: var(--color-navy);
+  --color-brand-dark: var(--color-teal-text);
+  --color-brand-deep: var(--color-navy-2);
+  --color-brand-50: var(--color-teal-50);
+  --color-brand-100: var(--color-teal-100);
+  --color-accent: var(--color-iris);
+  --color-accent-dark: var(--color-iris-dark);
+  --color-accent-50: var(--color-iris-50);
+  --color-highlight: var(--color-teal);
+  --color-highlight-50: var(--color-iris-50);
+
+  --font-sans: var(--font-body), "Noto Sans Bengali", ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-head), var(--font-body), "Noto Sans Bengali", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-code), ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --font-bn: var(--font-body), "Noto Sans Bengali", sans-serif;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+
+  --shadow-card: 0 1px 0 rgb(8 15 26 / 0.03);
+  --shadow-lift: 0 1px 2px rgb(8 15 26 / 0.04), 0 24px 48px -16px rgb(20 35 60 / 0.22);
+}
+
+:root {
+  --gutter: clamp(18px, 4vw, 48px);
+}
+
+html:has(dialog[open]) {
+  overflow: hidden;
+}
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+/* Lenis */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-stopped {
+  overflow: clip;
+}
+
+body {
+  background: #fff;
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-size: 17px;
+  line-height: 1.65;
+  overflow-x: clip;
+}
+
+@layer components {
+  .container-x {
+    width: 100%;
+    max-width: 1320px;
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+  }
+
+  /* ---------- type ---------- */
+  .display {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(2.9rem, 7.4vw, 7.6rem);
+    line-height: 0.95;
+    letter-spacing: -0.045em;
+  }
+  .h1 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(2.4rem, 4.6vw + 0.6rem, 4.8rem);
+    line-height: 1.02;
+    letter-spacing: -0.04em;
+    text-wrap: balance;
+  }
+  .h2 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(2rem, 3vw + 0.8rem, 3.6rem);
+    line-height: 1.04;
+    letter-spacing: -0.035em;
+    text-wrap: balance;
+  }
+  .h3 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.3rem;
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+  }
+  .accent {
+    font: inherit;
+  }
+  .lede {
+    font-size: clamp(1.05rem, 0.35vw + 1rem, 1.22rem);
+    line-height: 1.7;
+  }
+  .bn {
+    font-family: var(--font-bn);
+    line-height: 1.8;
+  }
+
+  /* mono label: ● SOFTWARE */
+  .tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-slate);
+  }
+  .tag::before {
+    content: "";
+    width: 7px;
+    height: 7px;
+    border-radius: 99px;
+    background: var(--color-teal);
+    box-shadow: 0 0 0 4px rgb(0 212 199 / 0.16);
+  }
+
+  .text-gradient {
+    background: linear-gradient(100deg, #5ff5ea 0%, var(--color-teal) 35%, #a78bfa 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* ---------- surfaces ---------- */
+  .card,
+  .card-light {
+    background: #fff;
+    border: 1px solid var(--color-line);
+    border-radius: 20px;
+  }
+  .card-hover {
+    transition: transform 0.6s var(--ease-out-expo), box-shadow 0.6s var(--ease-out-expo), border-color 0.3s;
+  }
+  .card-hover:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lift);
+    border-color: rgb(20 35 60 / 0.2);
+  }
+  .icon-box {
+    display: grid;
+    place-items: center;
+    width: 3rem;
+    height: 3rem;
+    flex-shrink: 0;
+    border-radius: 14px;
+    background: linear-gradient(140deg, var(--color-teal-50), var(--color-iris-50));
+    color: var(--color-navy);
+  }
+
+  /* glass panel for dark sections */
+  .glass {
+    background: linear-gradient(160deg, rgb(255 255 255 / 0.07), rgb(255 255 255 / 0.02));
+    border: 1px solid rgb(255 255 255 / 0.1);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+
+  /* dark canvas background: fine grid + soft glows */
+  .bg-grid-dark {
+    background-color: var(--color-void);
+    background-image:
+      radial-gradient(60% 50% at 75% 20%, rgb(0 212 199 / 0.12), transparent 70%),
+      radial-gradient(50% 50% at 10% 90%, rgb(139 92 246 / 0.14), transparent 70%),
+      linear-gradient(rgb(255 255 255 / 0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgb(255 255 255 / 0.035) 1px, transparent 1px);
+    background-size: auto, auto, 72px 72px, 72px 72px;
+  }
+
+  /* cursor spotlight on cards (set --mx/--my via JS) */
+  .spotlight {
+    position: relative;
+    isolation: isolate;
+  }
+  .spotlight::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.4s;
+    background: radial-gradient(360px circle at var(--mx, 50%) var(--my, 50%), rgb(0 212 199 / 0.14), transparent 65%);
+    z-index: -1;
+  }
+  .spotlight:hover::after {
+    opacity: 1;
+  }
+
+  .prose-legal h2 {
+    margin-top: 2.5rem;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--color-ink);
+  }
+  .prose-legal li {
+    margin-left: 1.25rem;
+    list-style: disc;
+  }
+}
+
+/* SplitText line masks */
+.split-line {
+  overflow: clip;
+  padding-bottom: 0.08em;
+  margin-bottom: -0.08em;
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-teal);
+  outline-offset: 2px;
+}
+::selection {
+  background: var(--color-teal);
+  color: var(--color-ink);
+}
+
+@keyframes marquee {
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+.marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 40s linear infinite;
+}
+@keyframes pulse-ring {
+  0% { box-shadow: 0 0 0 0 rgb(0 212 199 / 0.5); }
+  70% { box-shadow: 0 0 0 16px rgb(0 212 199 / 0); }
+  100% { box-shadow: 0 0 0 0 rgb(0 212 199 / 0); }
+}
+@keyframes scroll-cue {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(200%); }
+}
+
+/* Elements GSAP will animate start hidden only when motion is on (set before paint in layout). */
+.motion [data-reveal],
+.motion [data-hero-in] {
+  opacity: 0;
+}
+.motion [data-split] {
+  visibility: hidden;
+}
+/* Failsafe if the motion script never boots. */
+html.motion:not(.motion-ready) [data-reveal],
+html.motion:not(.motion-ready) [data-hero-in] {
+  animation: failsafe-show 0.6s 2.5s forwards;
+}
+html.motion:not(.motion-ready) [data-split] {
+  animation: failsafe-vis 0s 2.5s forwards;
+}
+@keyframes failsafe-show {
+  to { opacity: 1; }
+}
+@keyframes failsafe-vis {
+  to { visibility: visible; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .marquee {
+    flex-wrap: wrap;
+    width: auto;
+  }
+}
