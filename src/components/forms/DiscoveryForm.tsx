@@ -205,7 +205,7 @@ export function DiscoveryForm() {
             defaultChecked={val("consent") === "on"}
             aria-invalid={!!err("consent")}
             aria-describedby={err("consent") ? `${uid}-consent-err` : undefined}
-            className="mt-0.5 h-5 w-5 shrink-0 rounded accent-[#00a89e]"
+            className="mt-0.5 h-5 w-5 shrink-0 rounded accent-[#0f766e]"
           />
           <span>
             I agree that Retail Soft may store these details and contact me about this inquiry, as described in the{" "}
@@ -219,7 +219,7 @@ export function DiscoveryForm() {
         <button
           type="submit"
           disabled={pending}
-          className="inline-flex items-center justify-center gap-2 rounded-lg bg-teal px-8 py-4 text-lg font-semibold text-ink shadow-[0_6px_16px_rgb(0_212_199/0.3)] transition hover:bg-teal-deep disabled:translate-y-0 disabled:opacity-60"
+          className="inline-flex items-center justify-center gap-2 rounded-lg bg-ink px-8 py-4 text-lg font-semibold text-white transition hover:bg-navy disabled:translate-y-0 disabled:opacity-60"
         >
           {pending ? "Sending…" : intent === "demo" ? "Request a Demo" : "Send Inquiry"}
         </button>

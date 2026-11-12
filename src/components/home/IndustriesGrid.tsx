@@ -3,14 +3,14 @@ import { IndustryList } from "@/components/home/IndustryList";
 
 export function IndustriesGrid({ heading = true }: { heading?: boolean }) {
   return (
-    <section className="bg-cloud py-24 sm:py-32">
+    <section className="border-t border-line bg-cloud py-20 sm:py-28">
       <div className="container-x">
         {heading && (
-          <div className="mb-14 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+          <div className="mb-12 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
             <div>
               <p className="tag">Industries</p>
-              <h2 data-split className="h2 mt-4 max-w-[14ch] text-ink">Made for your type of business.</h2>
-              <p lang="bn" className="bn mt-3 text-lg text-teal-text">আপনার ব্যবসার ধরন অনুযায়ী সমাধান</p>
+              <h2 className="h2 mt-3 max-w-[16ch] text-ink">Made for your type of business.</h2>
+              <p lang="bn" className="bn mt-2 text-lg text-slate">আপনার ব্যবসার ধরন অনুযায়ী সমাধান</p>
             </div>
             <p className="max-w-sm text-slate">
               A shop, a garment factory and a school all work differently. We set the software up to match the way you
@@ -21,7 +21,7 @@ export function IndustriesGrid({ heading = true }: { heading?: boolean }) {
         <IndustryList />
         <p className="mt-10 text-slate">
           Something else?{" "}
-          <Link href="#" className="font-semibold text-ink underline decoration-teal decoration-2 underline-offset-4">Tell us about your business →</Link>
+          <Link href="#" className="font-semibold text-ink underline decoration-line underline-offset-4">Tell us about your business →</Link>
         </p>
       </div>
     </section>

@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Hind_Siliguri, JetBrains_Mono, Space_Grotesk } from "next/font/google";
+import { Hind_Siliguri, Inter } from "next/font/google";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { FloatingContact } from "@/components/layout/FloatingContact";
@@ -16,12 +16,10 @@ const body = Hind_Siliguri({
   display: "swap",
 });
 
-// Headings: the brand's Space Grotesk.
-const head = Space_Grotesk({ variable: "--font-head", subsets: ["latin"], weight: ["500", "600", "700"], display: "swap" });
-// Mono labels and data figures.
-const code = JetBrains_Mono({ variable: "--font-code", subsets: ["latin"], weight: ["400", "500"], display: "swap" });
+// Headings and labels: a neutral, highly legible sans.
+const head = Inter({ variable: "--font-head", subsets: ["latin"], weight: ["500", "600", "700"], display: "swap" });
 
-// Set before first paint so entrance animations don't flash. Skipped for reduced-motion visitors.
+// Set before first paint so the soft fade-ins don't flash. Skipped for reduced-motion visitors.
 const motionFlag = `if(!matchMedia("(prefers-reduced-motion: reduce)").matches)document.documentElement.classList.add("motion")`;
 
 export const metadata: Metadata = {
@@ -45,7 +43,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#04070d",
+  themeColor: "#ffffff",
   colorScheme: "light",
 };
 
@@ -68,7 +66,7 @@ const orgJsonLd = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${body.variable} ${head.variable} ${code.variable} antialiased`} suppressHydrationWarning>
+    <html lang="en" className={`${body.variable} ${head.variable} antialiased`} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: motionFlag }} />
       </head>

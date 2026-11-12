@@ -1,57 +1,57 @@
 @import "tailwindcss";
 
 /*
- * Design language - "Business in motion"
- * Deep ink canvases with a living Three.js particle field, crisp light sections in between,
- * teal for action, iris for depth. Large confident type, mono labels, GSAP-driven motion
- * (Lenis smooth scroll, split-text reveals, scroll-scrubbed scenes, magnetic controls).
+ * Design language - "Quiet and clear"
+ * Light paper surfaces, dark ink type, one calm teal accent. Generous whitespace, thin rules,
+ * no gradients, glows or 3D. Motion is limited to a soft fade as content enters the page.
  */
 @theme {
-  /* Retail Soft brand palette */
-  --color-void: #04070d;
-  --color-ink: #080f1a;
-  --color-navy: #14233c;
-  --color-navy-2: #0e1a2e;
-  --color-teal: #00d4c7;
-  --color-teal-deep: #00a89e;
-  --color-iris: #8b5cf6;
-  --color-cloud: #f2f4f8;
-  --color-mist: #9fb0c8;
-  --color-slate: #4a5a72;
+  /* Retail Soft palette */
+  --color-void: #0f141c;
+  --color-ink: #141a22;
+  --color-navy: #1f2a37;
+  --color-navy-2: #141a22;
+  --color-teal: #14a394;
+  --color-teal-deep: #0f7f74;
+  --color-iris: #475467;
+  --color-cloud: #f6f6f3;
+  --color-mist: #98a2b3;
+  --color-slate: #5b6472;
 
-  --color-teal-text: #00827a;
-  --color-teal-50: #e6f9f7;
-  --color-teal-100: #c4f1ec;
-  --color-iris-dark: #6d3fe0;
-  --color-iris-50: #f1ecfe;
-  --color-line: #e2e8f0;
+  --color-teal-text: #0f766e;
+  --color-teal-50: #eef8f6;
+  --color-teal-100: #d4efea;
+  --color-iris-dark: #344054;
+  --color-iris-50: #f2f4f7;
+  --color-line: #e6e4df;
   --color-whatsapp: #1fa855;
 
   /* semantic roles used by components */
-  --color-brand: var(--color-navy);
+  --color-brand: var(--color-ink);
   --color-brand-dark: var(--color-teal-text);
   --color-brand-deep: var(--color-navy-2);
   --color-brand-50: var(--color-teal-50);
   --color-brand-100: var(--color-teal-100);
-  --color-accent: var(--color-iris);
-  --color-accent-dark: var(--color-iris-dark);
-  --color-accent-50: var(--color-iris-50);
+  --color-accent: var(--color-teal-text);
+  --color-accent-dark: var(--color-teal-deep);
+  --color-accent-50: var(--color-teal-50);
   --color-highlight: var(--color-teal);
-  --color-highlight-50: var(--color-iris-50);
+  --color-highlight-50: var(--color-teal-50);
 
   --font-sans: var(--font-body), "Noto Sans Bengali", ui-sans-serif, system-ui, sans-serif;
   --font-display: var(--font-head), var(--font-body), "Noto Sans Bengali", ui-sans-serif, system-ui, sans-serif;
-  --font-mono: var(--font-code), ui-monospace, "SFMono-Regular", Menlo, monospace;
+  /* Labels use the heading face instead of a code font: friendlier, less "techy". */
+  --font-mono: var(--font-head), ui-sans-serif, system-ui, sans-serif;
   --font-bn: var(--font-body), "Noto Sans Bengali", sans-serif;
 
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 
-  --shadow-card: 0 1px 0 rgb(8 15 26 / 0.03);
-  --shadow-lift: 0 1px 2px rgb(8 15 26 / 0.04), 0 24px 48px -16px rgb(20 35 60 / 0.22);
+  --shadow-card: 0 1px 2px rgb(20 26 34 / 0.04);
+  --shadow-lift: 0 1px 2px rgb(20 26 34 / 0.04), 0 8px 24px -12px rgb(20 26 34 / 0.12);
 }
 
 :root {
-  --gutter: clamp(18px, 4vw, 48px);
+  --gutter: clamp(20px, 4vw, 40px);
 }
 
 html:has(dialog[open]) {
@@ -59,18 +59,8 @@ html:has(dialog[open]) {
 }
 html {
   -webkit-text-size-adjust: 100%;
-}
-
-/* Lenis */
-html.lenis,
-html.lenis body {
-  height: auto;
-}
-.lenis.lenis-smooth {
-  scroll-behavior: auto !important;
-}
-.lenis.lenis-stopped {
-  overflow: clip;
+  scroll-behavior: smooth;
+  scroll-padding-top: 88px;
 }
 
 body {
@@ -85,7 +75,7 @@ body {
 @layer components {
   .container-x {
     width: 100%;
-    max-width: 1320px;
+    max-width: 1200px;
     margin-inline: auto;
     padding-inline: var(--gutter);
   }
@@ -94,38 +84,39 @@ body {
   .display {
     font-family: var(--font-display);
     font-weight: 600;
-    font-size: clamp(2.9rem, 7.4vw, 7.6rem);
-    line-height: 0.95;
-    letter-spacing: -0.045em;
+    font-size: clamp(2.5rem, 4.4vw + 0.8rem, 4.25rem);
+    line-height: 1.06;
+    letter-spacing: -0.035em;
+    text-wrap: balance;
   }
   .h1 {
     font-family: var(--font-display);
     font-weight: 600;
-    font-size: clamp(2.4rem, 4.6vw + 0.6rem, 4.8rem);
-    line-height: 1.02;
-    letter-spacing: -0.04em;
+    font-size: clamp(2.2rem, 3vw + 1rem, 3.5rem);
+    line-height: 1.1;
+    letter-spacing: -0.03em;
     text-wrap: balance;
   }
   .h2 {
     font-family: var(--font-display);
     font-weight: 600;
-    font-size: clamp(2rem, 3vw + 0.8rem, 3.6rem);
-    line-height: 1.04;
-    letter-spacing: -0.035em;
+    font-size: clamp(1.8rem, 1.6vw + 1.2rem, 2.6rem);
+    line-height: 1.15;
+    letter-spacing: -0.025em;
     text-wrap: balance;
   }
   .h3 {
     font-family: var(--font-display);
     font-weight: 600;
-    font-size: 1.3rem;
-    line-height: 1.25;
-    letter-spacing: -0.02em;
+    font-size: 1.2rem;
+    line-height: 1.3;
+    letter-spacing: -0.015em;
   }
   .accent {
     font: inherit;
   }
   .lede {
-    font-size: clamp(1.05rem, 0.35vw + 1rem, 1.22rem);
+    font-size: clamp(1.05rem, 0.3vw + 1rem, 1.18rem);
     line-height: 1.7;
   }
   .bn {
@@ -133,32 +124,21 @@ body {
     line-height: 1.8;
   }
 
-  /* mono label: ● SOFTWARE */
+  /* small section label */
   .tag {
     display: inline-flex;
     align-items: center;
-    gap: 0.6rem;
+    gap: 0.5rem;
     font-family: var(--font-mono);
-    font-size: 0.74rem;
-    font-weight: 500;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--color-slate);
-  }
-  .tag::before {
-    content: "";
-    width: 7px;
-    height: 7px;
-    border-radius: 99px;
-    background: var(--color-teal);
-    box-shadow: 0 0 0 4px rgb(0 212 199 / 0.16);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: var(--color-teal-text);
   }
 
+  /* Accent phrase: plain colour, no gradient. */
   .text-gradient {
-    background: linear-gradient(100deg, #5ff5ea 0%, var(--color-teal) 35%, #a78bfa 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
+    color: var(--color-teal-text);
   }
 
   /* ---------- surfaces ---------- */
@@ -166,64 +146,36 @@ body {
   .card-light {
     background: #fff;
     border: 1px solid var(--color-line);
-    border-radius: 20px;
+    border-radius: 16px;
   }
   .card-hover {
-    transition: transform 0.6s var(--ease-out-expo), box-shadow 0.6s var(--ease-out-expo), border-color 0.3s;
+    transition: border-color 0.2s, box-shadow 0.2s;
   }
   .card-hover:hover {
-    transform: translateY(-4px);
     box-shadow: var(--shadow-lift);
-    border-color: rgb(20 35 60 / 0.2);
+    border-color: rgb(20 26 34 / 0.18);
   }
   .icon-box {
     display: grid;
     place-items: center;
-    width: 3rem;
-    height: 3rem;
+    width: 2.75rem;
+    height: 2.75rem;
     flex-shrink: 0;
-    border-radius: 14px;
-    background: linear-gradient(140deg, var(--color-teal-50), var(--color-iris-50));
-    color: var(--color-navy);
+    border-radius: 12px;
+    background: var(--color-teal-50);
+    color: var(--color-teal-text);
   }
 
-  /* glass panel for dark sections */
+  /* Former effect classes, kept as plain surfaces so older markup still looks right. */
   .glass {
-    background: linear-gradient(160deg, rgb(255 255 255 / 0.07), rgb(255 255 255 / 0.02));
-    border: 1px solid rgb(255 255 255 / 0.1);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
+    background: rgb(255 255 255 / 0.06);
+    border: 1px solid rgb(255 255 255 / 0.12);
   }
-
-  /* dark canvas background: fine grid + soft glows */
   .bg-grid-dark {
-    background-color: var(--color-void);
-    background-image:
-      radial-gradient(60% 50% at 75% 20%, rgb(0 212 199 / 0.12), transparent 70%),
-      radial-gradient(50% 50% at 10% 90%, rgb(139 92 246 / 0.14), transparent 70%),
-      linear-gradient(rgb(255 255 255 / 0.035) 1px, transparent 1px),
-      linear-gradient(90deg, rgb(255 255 255 / 0.035) 1px, transparent 1px);
-    background-size: auto, auto, 72px 72px, 72px 72px;
+    background-color: var(--color-ink);
   }
-
-  /* cursor spotlight on cards (set --mx/--my via JS) */
   .spotlight {
     position: relative;
-    isolation: isolate;
-  }
-  .spotlight::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    pointer-events: none;
-    opacity: 0;
-    transition: opacity 0.4s;
-    background: radial-gradient(360px circle at var(--mx, 50%) var(--my, 50%), rgb(0 212 199 / 0.14), transparent 65%);
-    z-index: -1;
-  }
-  .spotlight:hover::after {
-    opacity: 1;
   }
 
   .prose-legal h2 {
@@ -238,75 +190,48 @@ body {
   }
 }
 
-/* SplitText line masks */
-.split-line {
-  overflow: clip;
-  padding-bottom: 0.08em;
-  margin-bottom: -0.08em;
-}
-
 :focus-visible {
-  outline: 3px solid var(--color-teal);
+  outline: 2px solid var(--color-teal-deep);
   outline-offset: 2px;
 }
 ::selection {
-  background: var(--color-teal);
+  background: var(--color-teal-100);
   color: var(--color-ink);
 }
 
-@keyframes marquee {
-  to {
-    transform: translate3d(-50%, 0, 0);
-  }
-}
-.marquee {
-  display: flex;
-  width: max-content;
-  animation: marquee 40s linear infinite;
-}
-@keyframes pulse-ring {
-  0% { box-shadow: 0 0 0 0 rgb(0 212 199 / 0.5); }
-  70% { box-shadow: 0 0 0 16px rgb(0 212 199 / 0); }
-  100% { box-shadow: 0 0 0 0 rgb(0 212 199 / 0); }
-}
-@keyframes scroll-cue {
-  0% { transform: translateY(-100%); }
-  100% { transform: translateY(200%); }
-}
-
-/* Elements GSAP will animate start hidden only when motion is on (set before paint in layout). */
+/* Gentle fade as content enters the viewport (see components/motion/Motion.tsx). */
 .motion [data-reveal],
-.motion [data-hero-in] {
+.motion [data-stagger] > * {
   opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
 }
-.motion [data-split] {
-  visibility: hidden;
+.motion [data-reveal].is-in,
+.motion [data-stagger] > .is-in {
+  opacity: 1;
+  transform: none;
 }
-/* Failsafe if the motion script never boots. */
+/* Failsafe if the script never boots. */
 html.motion:not(.motion-ready) [data-reveal],
-html.motion:not(.motion-ready) [data-hero-in] {
-  animation: failsafe-show 0.6s 2.5s forwards;
-}
-html.motion:not(.motion-ready) [data-split] {
-  animation: failsafe-vis 0s 2.5s forwards;
+html.motion:not(.motion-ready) [data-stagger] > * {
+  animation: failsafe-show 0.4s 2s forwards;
 }
 @keyframes failsafe-show {
-  to { opacity: 1; }
-}
-@keyframes failsafe-vis {
-  to { visibility: visible; }
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
   *,
   *::before,
   *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
-  }
-  .marquee {
-    flex-wrap: wrap;
-    width: auto;
   }
 }

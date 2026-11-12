@@ -63,7 +63,7 @@ export function DemoModal() {
           <IconClose width={22} height={22} />
         </button>
       </header>
-      <div data-lenis-prevent className="overflow-y-auto overscroll-contain">
+      <div className="overflow-y-auto overscroll-contain">
         {session > 0 && <DemoForm key={session} need={need} onClose={close} />}
       </div>
     </dialog>

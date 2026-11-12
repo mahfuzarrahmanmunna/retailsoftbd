@@ -1,11 +1,11 @@
 import type { ReactNode } from "react";
 
-/** Mono label above section titles: ● SOFTWARE */
+/** Small label above section titles. */
 export function Eyebrow({ children, tone = "light" }: { children: ReactNode; tone?: "light" | "dark" }) {
-  return <p className={tone === "dark" ? "tag !text-white/50" : "tag"}>{children}</p>;
+  return <p className={tone === "dark" ? "tag !text-teal" : "tag"}>{children}</p>;
 }
 
-/** Renders a title; `accent` (a phrase inside it) gets the brand gradient. */
+/** Renders a title; `accent` (a phrase inside it) gets the accent colour. */
 export function AccentTitle({ text, accent }: { text: string; accent?: string; scribble?: boolean; dark?: boolean }) {
   if (!accent || !text.includes(accent)) return <>{text}</>;
   const [before, after] = text.split(accent);
@@ -19,7 +19,7 @@ export function AccentTitle({ text, accent }: { text: string; accent?: string; s
 }
 
 /**
- * Section heading: label, title (lines rise in on scroll), Bangla line and intro.
+ * Section heading: label, title, Bangla line and intro.
  * `title` is an array of lines for backwards compatibility; lines are joined with a space.
  */
 export function SectionHeader({
@@ -48,11 +48,11 @@ export function SectionHeader({
   return (
     <div className={`max-w-3xl ${align === "center" ? "mx-auto text-center [&_.tag]:justify-center [&_.lede]:mx-auto" : ""}`}>
       {eyebrow && <Eyebrow tone={tone}>{eyebrow}</Eyebrow>}
-      <Tag data-split className={`${Tag === "h1" ? "h1" : "h2"} mt-4 ${dark ? "text-white" : "text-ink"}`}>
+      <Tag className={`${Tag === "h1" ? "h1" : "h2"} mt-3 ${dark ? "text-white" : "text-ink"}`}>
         <AccentTitle text={title.join(" ")} accent={dark ? accent : undefined} />
       </Tag>
       {bn && (
-        <p lang="bn" className={`bn mt-3 text-lg ${dark ? "text-teal" : "text-teal-text"}`}>
+        <p lang="bn" className={`bn mt-2 text-lg ${dark ? "text-white/70" : "text-slate"}`}>
           {bn}
         </p>
       )}

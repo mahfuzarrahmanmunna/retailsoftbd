@@ -1,6 +1,15 @@
 import { industries, site } from "@/lib/content";
 import { DemoButton } from "@/components/demo/DemoButton";
-import { IconArrowRight, IconPhone, IconWhatsApp, industryIcon } from "@/components/ui/Icons";
+import { DashboardPreview } from "@/components/home/DashboardPreview";
+import {
+  IconCheck,
+  IconInsight,
+  IconPhone,
+  IconPOS,
+  IconStock,
+  IconWhatsApp,
+  industryIcon,
+} from "@/components/ui/Icons";
 
 export function BDFlag({ className = "" }: { className?: string }) {
   return (
@@ -11,94 +20,104 @@ export function BDFlag({ className = "" }: { className?: string }) {
   );
 }
 
-const facts = [
-  { k: "Local team", v: "North Badda, Dhaka" },
-  { k: "Language", v: "Bangla & English" },
-  { k: "Included", v: "Setup · training · support" },
+const highlights = [
+  { icon: IconPOS, label: "POS & billing" },
+  { icon: IconStock, label: "Stock & warehouse" },
+  { icon: IconInsight, label: "Accounts & reports" },
 ];
 
-/** Full-screen opener over the particle field (shape 0: the connected sphere). */
+/** Homepage banner: message and actions on the left, a clickable product preview on the right. */
 export function Hero() {
   return (
-    <section data-morph-step="0" data-morph-side="right" aria-label="Introduction" className="relative z-10 flex min-h-svh flex-col">
-      <div className="container-x flex flex-1 flex-col justify-center pb-10 pt-16 sm:pt-20">
-        <p data-hero-in="0" className="tag !text-white/60">
-          <BDFlag className="h-3 w-5 rounded-[2px]" /> Software company · Dhaka, Bangladesh
-        </p>
+    <section aria-label="Introduction" className="relative overflow-hidden border-b border-line bg-white">
+      {/* quiet backdrop: a tinted panel behind the product preview (desktop) */}
+      <div aria-hidden="true" className="absolute inset-y-0 right-0 hidden w-[42%] border-l border-line bg-cloud lg:block" />
 
-        <h1 data-split="load" className="display mt-7 max-w-[11.5ch] text-white">
-          Software built around <span className="text-gradient">your business.</span>
-        </h1>
+      <div className="container-x relative grid items-center gap-14 py-14 sm:py-16 lg:grid-cols-[1fr_1.05fr] lg:gap-14 lg:py-20">
+        {/* ---------- message ---------- */}
+        <div>
+          <p className="inline-flex items-center gap-2 rounded-full border border-line bg-white py-1 pl-1.5 pr-3 text-[0.82rem] font-medium text-slate">
+            <span className="rounded-full bg-teal-50 px-2 py-0.5 text-[0.75rem] font-semibold text-teal-text">Dhaka</span>
+            <BDFlag className="h-3 w-5 rounded-[2px]" />
+            Business software company in Bangladesh
+          </p>
 
-        <div className="mt-8 grid max-w-2xl gap-8">
-          <div>
-            <p data-hero-in="1" lang="bn" className="bn text-xl font-semibold text-teal">{site.taglineBn}</p>
-            <p data-hero-in="2" className="lede mt-3 max-w-xl text-white/70">
-              POS, inventory, accounts, ERP and websites - set up around the way your shop, factory or office already
-              works, by a team you can meet in person.
-            </p>
-          </div>
+          <h1 className="mt-6 max-w-[17ch] font-display text-[clamp(2.4rem,3.4vw+1rem,3.9rem)] font-semibold leading-[1.08] tracking-[-0.035em] text-balance text-ink">
+            Software built around <span className="text-teal-text">your business.</span>
+          </h1>
 
-          <div data-hero-in="3" className="flex flex-wrap items-center gap-3">
-            <span data-magnetic className="inline-block">
-              <DemoButton arrow className="!px-7 !py-4 shadow-[0_0_40px_-6px_rgb(0_212_199/0.6)]">Book a free demo</DemoButton>
-            </span>
+          <p lang="bn" className="bn mt-4 text-[1.2rem] font-medium text-ink/75">{site.taglineBn}</p>
+
+          <p className="mt-4 max-w-[34rem] text-[1.08rem] leading-relaxed text-slate">
+            POS, inventory, accounts, ERP and websites, set up around the way your shop, factory or office already
+            works. Installed, trained and supported by our team in Dhaka.
+          </p>
+
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+            <DemoButton arrow className="!px-7 !py-3.5">Book a free demo</DemoButton>
             <a
-              data-magnetic
               href={`tel:${site.contact.phone}`}
-              className="inline-flex items-center gap-2 rounded-full px-6 py-4 font-semibold text-white ring-1 ring-inset ring-white/25 transition-colors hover:bg-white/10"
+              className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg bg-white px-6 py-3.5 font-semibold text-ink ring-1 ring-inset ring-ink/15 transition-shadow hover:ring-ink/40"
             >
-              <IconPhone width={19} height={19} /> {site.contact.phoneDisplay}
+              <IconPhone width={18} height={18} className="text-teal-text" /> <span className="sm:max-xl:hidden">Call</span> {site.contact.phoneDisplay}
             </a>
-            <a
-              href={site.contact.whatsapp}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-2 py-4 font-semibold text-[#4ade80] hover:underline underline-offset-4"
-            >
-              <IconWhatsApp width={20} height={20} /> WhatsApp
+          </div>
+
+          <p className="mt-4 flex flex-wrap items-center gap-x-2 gap-y-1 text-[0.9rem] text-slate">
+            <IconWhatsApp width={16} height={16} className="text-whatsapp" />
+            Or
+            <a href={site.contact.whatsapp} target="_blank" rel="noopener noreferrer" className="font-semibold text-ink underline decoration-line underline-offset-4 hover:decoration-ink">
+              chat with us on WhatsApp
             </a>
+            <span aria-hidden="true" className="hidden text-line sm:inline">|</span>
+            {site.contact.hours}
+          </p>
+
+          <ul className="mt-10 grid max-w-[34rem] grid-cols-3 divide-x divide-line border-t border-line pt-6">
+            {highlights.map(({ icon: Icon, label }) => (
+              <li key={label} className="flex flex-col gap-2 px-4 first:pl-0 sm:flex-row sm:items-center">
+                <Icon width={20} height={20} className="shrink-0 text-teal-text" />
+                <span className="text-[0.88rem] font-medium leading-snug text-ink">{label}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* ---------- product preview ---------- */}
+        <div className="relative lg:pl-6">
+          <DashboardPreview />
+
+          <div className="absolute bottom-16 -left-12 hidden w-52 rounded-xl border border-line bg-white p-4 shadow-[0_12px_32px_-12px_rgb(20_26_34/0.22)] xl:block">
+            <div className="flex items-center gap-3">
+              <span className="grid h-9 w-9 place-items-center rounded-full bg-teal-50 text-teal-text">
+                <IconCheck width={17} height={17} strokeWidth={2.6} />
+              </span>
+              <div className="leading-tight">
+                <p className="text-[0.85rem] font-semibold text-ink">Payment received</p>
+                <p className="text-[0.78rem] text-slate">bKash · ৳ 1,240</p>
+              </div>
+            </div>
+            <p className="mt-3 border-t border-line pt-2.5 text-[0.75rem] text-slate">Stock and accounts updated automatically</p>
           </div>
         </div>
       </div>
 
-      {/* bottom rail: quick facts + scroll cue */}
-      <div className="container-x">
-        <div data-hero-in="4" className="flex flex-wrap items-end justify-between gap-6 border-t border-white/10 py-6">
-          <dl className="flex flex-wrap gap-x-12 gap-y-4">
-            {facts.map((f) => (
-              <div key={f.k}>
-                <dt className="font-mono text-[0.7rem] uppercase tracking-[0.16em] text-white/40">{f.k}</dt>
-                <dd className="mt-1 text-[0.95rem] text-white/85">{f.v}</dd>
-              </div>
-            ))}
-          </dl>
-          <span className="hidden items-center gap-3 font-mono text-[0.7rem] uppercase tracking-[0.16em] text-white/40 sm:flex">
-            Scroll
-            <span className="relative block h-10 w-px overflow-hidden bg-white/15">
-              <span className="absolute inset-x-0 top-0 h-1/2 bg-teal [animation:scroll-cue_1.8s_ease-in-out_infinite]" />
-            </span>
-          </span>
-        </div>
-      </div>
-
-      {/* industries ticker */}
-      <div className="relative overflow-hidden border-y border-white/10 bg-white/[0.02] py-5 [mask-image:linear-gradient(90deg,transparent,#000_8%,#000_92%,transparent)]">
-        <ul className="marquee">
-          {[0, 1].map((copy) =>
-            industries.map((i) => {
+      {/* ---------- industries strip ---------- */}
+      <div className="relative border-t border-line bg-white">
+        <div className="container-x flex flex-col gap-4 py-6 lg:flex-row lg:items-center lg:gap-10">
+          <p className="shrink-0 text-[0.85rem] font-semibold text-ink">Built for</p>
+          <ul className="flex flex-wrap gap-x-6 gap-y-3">
+            {industries.map((i) => {
               const Icon = industryIcon[i.slug];
               return (
-                <li key={`${copy}-${i.slug}`} aria-hidden={copy === 1 || undefined} className="flex shrink-0 items-center gap-3 px-8 text-white/75">
-                  <Icon width={22} height={22} className="text-teal" />
-                  <span className="font-display text-xl font-medium tracking-tight">{i.name}</span>
-                  <span lang="bn" className="bn text-sm text-white/40">{i.bn}</span>
-                  <IconArrowRight width={14} height={14} className="ml-6 text-white/20" />
+                <li key={i.slug} className="flex items-center gap-2 text-[0.9rem] text-slate">
+                  {Icon && <Icon width={17} height={17} className="text-ink/45" />}
+                  {i.name}
                 </li>
               );
-            }),
-          )}
-        </ul>
+            })}
+          </ul>
+        </div>
       </div>
     </section>
   );

@@ -6,10 +6,9 @@ type Item = (typeof hardware)[number];
 
 export function HardwareCard({ item, compact = false }: { item: Item; compact?: boolean }) {
   return (
-    <article data-tilt="6" className="spotlight group flex h-full flex-col overflow-hidden rounded-[24px] border border-line bg-white text-ink [transform-style:preserve-3d]">
-      <div className="relative overflow-hidden bg-[linear-gradient(160deg,#f2f4f8,#e8f6f4)] px-6 pt-7">
-        <span aria-hidden="true" className="absolute bottom-3 left-1/2 h-3 w-2/3 -translate-x-1/2 rounded-[50%] bg-navy/15 blur-md transition-all duration-700 group-hover:w-1/2" />
-        <HardwareArt kind={item.kind} className="relative mx-auto h-32 w-full max-w-[220px] transition-transform duration-700 ease-[var(--ease-out-expo)] group-hover:-translate-y-2 group-hover:scale-[1.05] sm:h-36" />
+    <article className="flex h-full flex-col overflow-hidden rounded-2xl border border-line bg-white text-ink">
+      <div className="border-b border-line bg-cloud/60 px-6 py-6">
+        <HardwareArt kind={item.kind} className="mx-auto h-28 w-full max-w-[200px] sm:h-32" />
       </div>
       <div className="flex flex-1 flex-col p-6">
         <h3 className="h3">{item.name}</h3>
@@ -25,18 +24,18 @@ export function HardwareCard({ item, compact = false }: { item: Item; compact?: 
           </ul>
         )}
         <div className="mt-auto pt-5">
-          <p className="mb-3 flex flex-wrap items-baseline justify-between gap-x-2 border-t border-line pt-3 font-mono text-[0.72rem] uppercase tracking-[0.12em]">
+          <p className="mb-3 flex flex-wrap items-baseline justify-between gap-x-2 border-t border-line pt-3 text-[0.82rem] font-medium">
             <span className="text-ink">Price on call</span>
-            <span lang="bn" className="bn text-xs normal-case tracking-normal text-slate">দাম জানতে যোগাযোগ করুন</span>
+            <span lang="bn" className="bn text-xs text-slate">দাম জানতে যোগাযোগ করুন</span>
           </p>
           <a
             href={whatsappWith(`Hi Retail Soft, I want the price of: ${item.name}`)}
             target="_blank"
             rel="noopener noreferrer"
             aria-label={`Ask price of ${item.name} on WhatsApp`}
-            className="flex w-full items-center justify-center gap-2 rounded-full bg-ink px-4 py-3 text-sm font-semibold text-white transition-colors hover:bg-whatsapp"
+            className="flex w-full items-center justify-center gap-2 rounded-lg px-4 py-2.5 text-sm font-semibold text-ink ring-1 ring-inset ring-ink/15 transition-shadow hover:ring-ink/40"
           >
-            <IconWhatsApp width={18} height={18} /> Ask price on WhatsApp
+            <IconWhatsApp width={18} height={18} className="text-whatsapp" /> Ask price on WhatsApp
           </a>
         </div>
       </div>
